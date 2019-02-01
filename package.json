@@ -32,11 +32,21 @@
       [
         "@pika/plugin-standard-pkg"
       ],
-      ["@pika/plugin-build-node"],
+      [
+        "@pika/plugin-build-node"
+      ],
       [
         "@pika/plugin-build-deno"
       ],
-      ["@pika/plugin-build-web"]
+      [
+        "@pika/plugin-build-web"
+      ]
     ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
