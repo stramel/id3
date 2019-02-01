@@ -1,10 +1,9 @@
-(function() {
-	var dataviewHelper = function(dv) {
+const dataviewHelper = function(dv) {
 		this.dataview = dv;
 	};
 
 	dataviewHelper.prototype.getString = function(length, offset, raw) {
-		var str = '',
+		let str = '',
 			i;
 
 		offset = offset || 0;
@@ -15,7 +14,7 @@
 		}
 
 		if(typeof Buffer !== 'undefined') {
-			var data = [];
+			const data = [];
 
 			for(i = offset; i < (offset + length); i++) {
 				data.push(this.dataview.getUint8(i));
@@ -36,7 +35,7 @@
 	};
 
 	dataviewHelper.prototype.getStringUtf16 = function(length, offset, bom) {
-		var littleEndian = false,
+		let littleEndian = false,
 			str = '',
 			useBuffer = false,
 			i;
@@ -58,7 +57,7 @@
 				return '';
 			}
 
-			var bomInt = this.dataview.getUint16(offset);
+			const bomInt = this.dataview.getUint16(offset);
 
 			if(bomInt === 0xFFFE) {
 				littleEndian = true;
@@ -69,7 +68,7 @@
 		}
 
 		for(i = offset; i < (offset + length); i += 2) {
-			var ch = this.dataview.getUint16(i, littleEndian);
+			let ch = this.dataview.getUint16(i, littleEndian);
 
 			if((ch >= 0 && ch <= 0xD7FF) || (ch >= 0xE000 && ch <= 0xFFFF)) {
 				if(useBuffer) {
@@ -96,7 +95,7 @@
 	};
 
 	dataviewHelper.prototype.getSynch = function(num) {
-		var out = 0,
+		let out = 0,
 			mask = 0x7f000000;
 		while(mask) {
 			out >>= 1;
@@ -124,5 +123,4 @@
 		return this.dataview.getUint8(offset + 2) + (this.dataview.getUint8(offset + 1) << 8) + (this.dataview.getUint8(offset) << 16);
 	};
 
-	module.exports = dataviewHelper;
-})();
+export default dataviewHelper

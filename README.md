@@ -7,7 +7,7 @@ AJAX
 ===
 
 ```html
-<script src="id3.min.js"></script>
+<script src="id3.min.js" module></script>
 <script type="text/javascript">
 id3('/audio/track.mp3', function(err, tags) {
 	// tags now contains v1, v2 and merged tags
@@ -29,7 +29,7 @@ npm install id3js
 Then use it like so:
 
 ```javascript
-var id3 = require('id3js');
+import id3 from 'id3js'
 
 id3({ file: './track.mp3', type: id3.OPEN_LOCAL }, function(err, tags) {
 	// tags now contains your ID3 tags
@@ -44,7 +44,7 @@ File API (HTML5)
 ===
 
 ```html
-<script src="id3.min.js"></script>
+<script src="id3.min.js" module></script>
 <script type="text/javascript">
 document.querySelector('input[type="file"]').onchange = function(e) {
 	id3(this.files[0], function(err, tags) {

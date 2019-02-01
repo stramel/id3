@@ -1,5 +1,4 @@
-(function() {
-	var Genres = [
+export default Genres = [
 		'Blues',
 		'Classic Rock',
 		'Country',
@@ -151,5 +150,3 @@
 		'Rock/Pop'
 	];
 
-	module.exports = Genres;
-})();

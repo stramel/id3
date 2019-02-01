@@ -14,17 +14,29 @@
     "parser"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "browserify": "^10.2.1",
-    "gulp": "^3.8.11",
-    "gulp-concat": "^2.5.2",
-    "gulp-jshint": "^1.11.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+  "scripts": {
+    "build": "pack build"
   },
   "dependencies": {
     "readerjs": "0.0.3"
+  },
+  "devDependencies": {
+    "@pika/plugin-build-deno": "^0.3.7",
+    "@pika/plugin-build-node": "^0.3.7",
+    "@pika/plugin-build-types": "^0.3.7",
+    "@pika/plugin-build-web": "^0.3.7",
+    "@pika/plugin-standard-pkg": "^0.3.7"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg"
+      ],
+      ["@pika/plugin-build-node"],
+      [
+        "@pika/plugin-build-deno"
+      ],
+      ["@pika/plugin-build-web"]
+    ]
   }
 }

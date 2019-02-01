@@ -1,14 +1,13 @@
-(function() {
 	/*
 	 * ID3Frame
 	 */
-	var ID3Frame = {},
-		DataviewHelper = require('./dataviewHelper.js');
+
+import DataviewHelper from './dataviewHelper.js'
 
 	/*
 	 * ID3v2.3 and later frame types
 	 */
-	ID3Frame.types = {
+export const types = {
 		/*
 		 * Textual frames
 		 */
@@ -123,7 +122,7 @@
 	/*
 	 * ID3 image types
 	 */
-	ID3Frame.imageTypes = [
+	export const imageTypes = [
 		'other',
 		'file-icon',
 		'icon',
@@ -150,23 +149,23 @@
 	/*
 	 * ID3v2.3 and later
 	 */
-	ID3Frame.parse = function(buffer, major, minor) {
+	export const parse = function(buffer, major, minor) {
 		minor = minor || 0;
 		major = major || 4;
 
-		var result = {tag: null, value: null},
-			dv = new DataView(buffer),
-			dvHelper = new DataviewHelper(dv),
-			encoding,
-			i,
-			variableStart,
-			variableLength;
+		const result = {tag: null, value: null}
+		const dv = new DataView(buffer)
+		const dvHelper = new DataviewHelper(dv)
+		let encoding
+		let i
+		let variableStart
+		let variableLength
 
 		if(major < 3) {
 			return ID3Frame.parseLegacy(buffer);
 		}
 
-		var header = {
+		const header = {
 			id: dvHelper.getString(4),
 			type: dvHelper.getString(1),
 			size: dvHelper.getUint32Synch(4),
@@ -245,7 +244,7 @@
 		} else if(header.id === 'APIC') {
 			encoding = dv.getUint8(10);
 
-			var image = {
+			const image = {
 				type: null,
 				mime: null,
 				description: null,
@@ -284,16 +283,16 @@
 	/*
 	 * ID3v2.2 and earlier
 	 */
-	ID3Frame.parseLegacy = function(buffer) {
-		var result = {tag: null, value: null},
+	export const parseLegacy = function(buffer) {
+		const result = {tag: null, value: null},
 			dv = new DataView(buffer),
 			dvHelper = new DataviewHelper(dv),
 			header = {
 				id: dvHelper.getString(3),
 				type: dvHelper.getString(1),
 				size: dvHelper.getUint24(3)
-			},
-			encoding,
+			};
+		let encoding,
 			i,
 			variableStart,
 			variableLength;
@@ -330,7 +329,7 @@
 		} else if(header.id === 'PIC') {
 			encoding = dv.getUint8(6);
 
-			var image = {
+			const  image = {
 				type: null,
 				mime: 'image/' + dvHelper.getString(3, 7).toLowerCase(),
 				description: null,
@@ -355,6 +354,3 @@
 		}
 		return (result.tag ? result : false);
 	};
-
-	module.exports = ID3Frame;
-})();
